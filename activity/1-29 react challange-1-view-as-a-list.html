@@ -1,0 +1,120 @@
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <div id='root'>
+
+        </div>
+        <style>
+            body{
+                background-color: cyan;
+                text-align: justify;
+                
+            }
+            table{
+                color:darkblue;
+                background-color:darkmagenta;
+                color:whitesmoke;
+            }
+            li{
+                color:black;
+                background-color: darkred;
+
+            }
+        </style>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react-dom.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/babel.js'></script>
+ 
+        <script type="text/babel">
+            const rootHandle = document.getElementById('root')
+
+            class ListTable extends React.Component{
+                constructor(){
+                    super()
+                    this.state = {
+                        tasks : [
+                            {id:1,name:'arjun',department:'tech',email:'arjun@gmail.com'},
+                            {id:2,name:'mahesh',department:'tech',email:'mahesh@gmail.com'},
+                            {id:3,name:'surabhi',department:'tech',email:'surabhi@gmail.com'},
+                            {id:4,name:'swaroop',department:'finance',email:'swaroop@gmail.com'},
+                            {id:5,name:'vageesh',department:'finance',email:'vageesh@gmail.com'},
+                        ],
+                        type:''
+                    }
+                }
+
+                handleChange=(e)=>{
+                    this.setState({type:e.target.value})
+                }
+
+                render() {
+                    return(
+                        <div>
+                            <div onChange={this.handleChange}>
+                                <input type='radio' value='list' name='userList' defaultChecked='checked'/>List
+                                <input type='radio' value='table' name='userList'/>table
+                            </div>
+                            {
+                                this.state.type =='table' ? <Table tasks={this.state.tasks} /> : <List tasks={this.state.tasks} />
+                            }
+                        
+                        </div>
+                    )
+                }
+            }
+
+            function List(props){
+                return(
+                    <div>
+                        <h2>Listing Users - {props.tasks.length}</h2>
+                        <ul> 
+                             {
+                                 props.tasks.map(function(ele){
+                                     return<li key={ele.id}>{ele.name} - {ele.email}</li>
+                                 })
+                             }
+                        </ul>
+
+                    </div>
+                )
+            }
+
+            function Table(props){
+                return(
+                    <div>
+                       <h2>Listing Users - {props.tasks.length}</h2>
+                        <table border="1">
+                               <thead>
+                                     <tr>
+                                         <th>#</th>
+                                         <th>user</th>
+                                         <th>gmail</th>
+                                     </tr>
+                               </thead>
+                               <tbody>
+                                     {
+                                         props.tasks.map(function(ele,i){
+                                             return(
+                                                 <tr key={ele.id}>
+                                                 <td>{i+1} </td>
+                                                 <td>{ele.name}</td>
+                                                 <td>{ele.email}</td>
+                                                 </tr>
+                                             )
+                                         })
+                                     }
+                               </tbody>
+
+                        </table>
+                    </div>    
+
+                )
+            }
+            
+            ReactDOM.render(<ListTable />,rootHandle)
+
+        </script>
+    </body>
+</html>

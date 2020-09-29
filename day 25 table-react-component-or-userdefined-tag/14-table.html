@@ -1,0 +1,97 @@
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <div id="root">
+            <!-- statically create a table or manually created -->
+            <!-- <table>
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>name</th>
+                        <th>dept</th>
+                        <th>email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>arjun</td>
+                        <td>tech</td>
+                        <td>arjun@gmail.com</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>mahesh</td>
+                        <td>finance</td>
+                        <td>mahesh@gmail.com</td>
+                    </tr>
+                </tbody>
+            </table> -->
+
+        </div>
+        <script src = 'C:\Users\Prince\Desktop\mern-stack\react\js\react.development.js'></script>
+        <script src = 'C:\Users\Prince\Desktop\mern-stack\react\js\react-dom.development.js'></script>
+        <script src = 'C:\Users\Prince\Desktop\mern-stack\react\js\babel.js'></script>
+
+        <script type='text/babel'>
+            const rootHandle=document.getElementById('root')
+            const employee=[// here we have a list of information of employee
+                {id:1,name:'arjun',department:'tech',email:'arjun@gmail.com'},
+                {id:2,name:'mahesh',department:'tech',email:'mahesh@gmail.com'},
+                {id:3,name:'surabhi',department:'tech',email:'surabhi@gmail.com'},
+                {id:4,name:'swaroop',department:'finance',email:'swaroop@gmail.com'},
+                {id:5,name:'vageesh',department:'finance',email:'vageesh@gmail.com'},
+            ]
+            const techEmployees=employee.filter(emp=>emp.department=='tech')//we use filter method to find the tech department from the table
+            const financeEmployees=employee.filter(emp=>emp.department=='finance')// we use filter method to find the finance department from the table  
+
+            //function - user defined tag - component 
+            function EmployeeTable(props)// here we create a component or we create a user defined tags here props is parameter which is object.
+            {
+                return (
+                    <div>
+                        <h2>{props.text} - {props.employee.length}</h2>
+                        <table border='1'>
+                        <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>name</th>
+                                <th>department</th>
+                                <th>email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                props.employee.map(function(ele)//always used parameter that we passed (props) then the array list of information (employee) then using map function or other
+                                {
+                                    return (
+                                        <tr key={ele.id}>
+                                            <td>{ele.id}</td>
+                                            <td>{ele.name}</td>
+                                            <td>{ele.department}</td>
+                                            <td>{ele.email}</td>
+                                        </tr>
+                                    )
+                                })
+                            }
+                        </tbody>
+                    </table>
+                    </div>
+                )
+            }
+//Dynamically create a table by using map function
+            const ele=(
+                <div>
+                   <EmployeeTable employee={employee} text='listing Employees'/>
+                   <EmployeeTable employee={techEmployees} text='listing Employees (tech)'/>
+                   <EmployeeTable employee={financeEmployees} text='listing Employees (finance)'/>
+                   
+                </div>
+            )
+            ReactDOM.render(ele,rootHandle)
+        </script>
+
+    </body>
+</html>

@@ -1,0 +1,58 @@
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react-dom.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/babel.js'></script>
+
+        <script type='text/babel'>
+            const rootHandle=document.getElementById('root')
+            class WordCount extends React.Component
+            {
+                constructor()
+                {
+                    super()
+                    this.state={
+                        text:'',
+                        words:0,
+                        char:0
+                    }
+                }
+                handleChange=(e)=>{
+                    const text=e.target.value
+                    let words=0
+                    const char=text.trim().length
+                    const word=text.trim().split(' ')
+                    for(let i=0;i<word.length;i++)
+                    {
+                        if(!word[i]==' ')
+                        {
+                            words++
+                        }
+                    }
+                    this.setState({text,char,words})
+
+                }
+                render()
+                {
+                    return (
+                        <div>
+                            <h2>Word Count</h2>
+                            <form>
+                                <textarea value={this.state.text} onChange={this.handleChange}/>
+                            </form>
+                            <h2>{`you have written ${this.state.words} words and ${this.state.char} characters`}</h2>
+                        </div>
+                    )
+                }
+            }
+            ReactDOM.render(<WordCount/>,rootHandle)
+        </script>
+
+    </body>
+</html>

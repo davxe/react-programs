@@ -1,0 +1,45 @@
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react-dom.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/babel.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/axios.js'></script>
+        <script type='text/babel'>
+            const rootHandle=document.getElementById('root')
+            class DisplayInCaps extends React.Component
+            {
+                constructor()
+                {
+                    super()
+                    this.state={
+                        text:''
+                    }
+                }
+                handleChange=(e)=>{
+                    const text=e.target.value
+                    this.setState(prevState=>{
+                        return{
+                            text:text.toUpperCase()
+                        }
+                    })
+                }
+                render()
+                {
+                    return(
+                        <div>
+                            <h2>Display In Caps</h2>
+                            <textarea value={this.state.text} onChange={this.handleChange}/>
+                        </div>
+                    )
+                }
+            }
+            ReactDOM.render(<DisplayInCaps/>,rootHandle)
+        </script>
+    </body>
+</html>

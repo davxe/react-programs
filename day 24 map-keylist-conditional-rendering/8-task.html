@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react-dom.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/babel.js'></script>
+        <script type='text/babel'>
+            const rootHandle=document.getElementById('root')
+            const task=[
+                {id:1,title:'dbbackup',completed:true},
+                {id:2,title:'server deploy',completed:false},
+                {id:3,title:'feature addition',completed:false},
+            ]
+            const result=(
+                <div>
+                    
+                    <ul>
+                        {
+                    task.map(function(link)
+                    {
+                       return <li key={link.id}>{link.title} - {link.completed==true?'completed':'on going'}</li>
+                    })
+                }
+                </ul>   
+                    </div>
+            
+            )
+            ReactDOM.render(result,rootHandle)
+
+        </script>
+
+    </body>
+</html>

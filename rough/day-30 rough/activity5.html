@@ -1,0 +1,65 @@
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react-dom.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/babel.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/axios.js'></script>
+        <script type='text/babel'>
+            const rootHandle=document.getElementById('root')
+            class HashTag extends React.Component
+            {
+                constructor()
+                {
+                    super()
+                    this.state={
+                        str:'',
+                        output:''
+                    }
+                }
+                handleChange=(e)=>{
+                    this.setState({[e.target.name]:e.target.value})
+                }
+                handleSubmit=(e)=>{
+                    e.preventDefault()
+                    const str=this.state.str.split(' ')
+                    let output='#'
+                    for(let i=0;i<str.length;i++)
+                    {
+                        output=output+str[i].charAt(0).toUpperCase()+str[i].slice(1).toLowerCase()
+                    }
+                    this.setState({output})
+
+                }
+                render()
+                {
+                    return(
+                        <div>
+                            <h2>HashTag Generator</h2>
+                            <form onSubmit={this.handleSubmit}>
+                                <label htmlFor='str'>Str:</label>
+                                <input
+                                    type='text'
+                                    value={this.state.str}
+                                    onChange={this.handleChange}
+                                    placholder='enter string'
+                                    id='str'
+                                    name='str'
+                                /><br/>
+                                <input type='submit' value='generate'/>
+                                <h2>{this.state.output}</h2>
+                            </form>
+                        </div>
+                    )
+                }
+            }
+            ReactDOM.render(<HashTag/>,rootHandle)
+        </script>
+
+    </body>
+</html>

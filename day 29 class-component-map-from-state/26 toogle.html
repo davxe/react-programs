@@ -1,0 +1,49 @@
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react-dom.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/babel.js'></script>
+
+        <script type='text/babel'>
+            const rootHandle=document.getElementById('root')
+            class Toggle extends React.Component
+            {
+                constructor()
+                {
+                    super()
+                    this.state={
+                        status:true
+                    }
+                }
+
+                handleToggle =()=>{
+                    this.setState(function(prevState)
+                    {
+                        return {
+                            status:!prevState.status//not operation used here for changing status 
+                        }
+                    })
+                }
+
+                render()
+                {
+                    return (
+                        <div>
+                        <h2>Toggle - {this.state.status?'on':'off'}</h2>
+                        <button onClick={this.handleToggle}>Toggle</button>
+                        </div>
+                    )
+                }
+            }
+            ReactDOM.render(<Toggle/>,rootHandle)
+            
+        </script>
+
+    </body>
+</html>

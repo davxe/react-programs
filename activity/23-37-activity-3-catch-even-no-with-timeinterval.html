@@ -1,0 +1,80 @@
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react-dom.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/babel.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/axios.js'></script>
+        <script type='text/babel'>
+            const rootHandle=document.getElementById('root')
+            class RandomEven extends React.Component
+            {
+                constructor()
+                {
+                    super()
+                    this.state={
+                        number:[],random:""
+                    }
+                }
+                generateRandomNumber = () =>
+                { 
+                    let result=0
+                    const random=Math.round(Math.random()*100)
+                    this.setState({random})
+                    if(random%2==0)
+                    {
+                        result+=random
+                        console.log('result:',result)
+                        this.setState(function(prevState)
+                        {
+                            return{
+                                number:prevState.number.concat(result)
+                            }
+                        })
+                    }   
+                }
+                handleStop=()=>
+                {
+                    clearInterval(this.state.interval)
+                }
+                handleStart=()=>{
+                    let interval= setInterval(this.generateRandomNumber,1000)
+                    this.setState({interval:interval})
+                }
+                render() 
+                {
+                    
+                    return(
+                        <div>
+                            <h2>Random No:-{this.state.random}</h2>
+                            <h2>Catch Even Numbers</h2>
+                            <h2>All Evens -:{this.state.number.length}</h2>
+                            <button onClick={this.handleStop}>stop</button>
+                            <button onClick={this.handleStart}>start</button>
+                            <ul>
+                                {
+                                    this.state.number.map((ele,i)=>{
+                                        return <li key={i}>{ele}</li>
+                                    })
+                                }
+                            </ul>
+                            
+                        </div>
+                    )
+                }
+                                
+            }
+            ReactDOM.render(<RandomEven/>,rootHandle)
+        </script>
+
+    </body>
+</html>
+
+
+
+

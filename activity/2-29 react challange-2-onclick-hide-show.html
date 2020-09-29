@@ -1,0 +1,47 @@
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react-dom.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/babel.js'></script>
+
+        <script type='text/babel'>
+            const rootHandle=document.getElementById('root')
+            class OnOff extends React.Component
+            {
+                constructor()
+                {
+                    super()
+                    this.state=
+                    {
+                        status:true
+                    }
+                }
+                handleShowHide =()=>{
+                    this.setState(function(prevState)
+                    {
+                        return {
+                            status:!prevState.status//not operation used here for changing status 
+                        }
+                    })
+                }
+                render()
+                {
+                    return(
+                    <div>
+                    <h2>{this.state.status ?'':'creates a clickable link that toggles between [show] and [hide]'}</h2>
+                    <button onClick={this.handleShowHide}>{this.state.status?'show':'hide'}</button>
+                    </div>
+                    )
+                }
+            }
+            ReactDOM.render(<OnOff/>,rootHandle)    
+        </script>
+
+    </body>
+</html>

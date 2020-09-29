@@ -1,0 +1,59 @@
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react-dom.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/babel.js'></script>
+
+        <script type='text/babel'>
+            const rootHandle=document.getElementById('root')
+            class FormSubmit extends React.Component
+            {
+                constructor()
+                {
+                    super()
+                    this.state={
+                        name:'',
+                        output:''
+                        
+                    }
+                }
+                handleChangeName=(event)=>{
+                    const name=event.target.value
+                    this.setState({name})
+                    const word=name.split('')
+                    const vowels='aeiouAEIOU'
+                    let output=''
+                    for(let i=0;i<word.length;i++)
+                    {
+                        if(!vowels.includes(word[i]))
+                        {
+                            output+=word[i]
+                        }
+                    }
+                   
+                    this.setState({output})
+                } 
+                render()
+                {
+                    return(
+                        <div>
+                            <h2>Text Without Vowels</h2>
+                            <h2>{this.state.output}</h2>
+                            <form onSubmit={this.handleSubmit}>    
+                                <textarea value={this.state.name} onChange={this.handleChangeName}/>
+                            </form>
+                        </div>
+                    )
+                }
+            }
+            ReactDOM.render(<FormSubmit/>,rootHandle)
+        </script>
+
+    </body>
+</html>

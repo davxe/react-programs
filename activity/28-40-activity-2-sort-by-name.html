@@ -1,0 +1,97 @@
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react-dom.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/babel.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/axios.js'></script>
+        <script type='text/babel'>
+            const rootHandle=document.getElementById('root')
+            class SortByName extends React.Component
+            {
+                constructor()
+                {
+                    super()
+                    this.state={
+                        users:[],
+                        sort:'',
+                        status:true   
+                    }
+                }
+                componentDidMount()
+                {
+                    axios.get('https://jsonplaceholder.typicode.com/users')
+                    .then(response=>{
+                        const users=response.data
+                        this.setState({users})
+                    })
+                }
+                handleChange=(sort)=>{
+                    const data=this.state.users.map(user=>{
+                        return (user.name)
+                    })
+                    let result=[]
+                        if(sort=='asc')
+                        {
+                            result=data.sort()
+                            console.log(result)
+                            this.setState(prevState=>{
+                                return{
+                                    users:prevState.users.concat(result),
+                                    sort:sort,
+                                    status:false
+                                }
+                            })
+                        
+                            
+                        }   
+                        else if(sort=='dsc')
+                        {
+                            result=data.reverse()
+                            console.log(result)
+                            this.setState(prevState=>{
+                                return{
+                                    users:prevState.users.concat(result),
+                                    sort:sort,
+                                    status:false
+                                }
+                            })
+                        }
+
+                        console.log(result)
+                }
+                render()
+                {
+                    console.log(this.state)
+                    return(
+                        <div>
+                            <h2>Listing Users</h2>
+                            <input type='radio' name='radio' id='radio' checked={this.state.sort=='asc'} onChange={()=>{
+                                this.handleChange('asc')
+                            }}/><label htmlFor='radio'>asc</label>
+                            <input type='radio' name='radio' id='radio1' checked={this.state.sort=='dsc'} onChange={()=>{
+                                this.handleChange('dsc')
+                            }}/><label htmlFor='radio1'>dsc</label>
+                            {
+                                this.state.users.map((ele,i)=>{
+                                    return (
+                                        <div key={i}>
+                                            <input type='text' value={ele.name}/>
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
+                    )
+                }
+            }
+            ReactDOM.render(<SortByName/>,rootHandle)    
+        </script>
+
+    </body>
+</html>

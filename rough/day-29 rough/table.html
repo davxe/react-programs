@@ -1,0 +1,73 @@
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react-dom.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/babel.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/axios.js'></script>
+        <script type='text/babel'>
+            const rootHandle=document.getElementById('root')
+            class TableList extends React.Component
+            {
+                constructor()
+                {
+                    super()
+                    this.state={
+                        tasks:[
+                            {id:1,title:'db backup',completed:true},
+                            {id:2,title:'firebase backup',completed:false},
+                            {id:3,title:'internet backup',completed:true},
+                        ]
+                    }
+                }
+                render()
+                {
+                    return(
+                        <div>
+                            <h2>Listing Tasks - {this.state.tasks.length}</h2>
+                            <TableShow tasks={this.state.tasks} onChange={this.handleChange}/>
+                        </div>
+                    )
+                }
+            }     
+            function TableShow(props)
+            {
+                return(
+                    <div>
+                        <table border='1'>
+                            <thead>
+                                <tr>
+                                    <th>id</th>
+                                    <th>title</th>
+                                    <th>status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    props.tasks.map((ele,i)=>{
+                                        return(
+                                            <tr key={i}>
+                                                <td>{ele.id}</td>
+                                                <td>{ele.title}</td>
+                                                <td>
+                                                    <input type='checkbox' checked={ele.completed}/>
+                                                    {ele.completed?'completed':'on-going'}</td>
+                                            </tr>
+                                        )
+                                    })
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                )
+            }
+            ReactDOM.render(<TableList/>,rootHandle)
+        </script>
+
+    </body>
+</html>

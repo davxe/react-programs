@@ -1,0 +1,54 @@
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react-dom.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/babel.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/axios.js'></script>
+        <script type='text/babel'>
+            const rootHandle=document.getElementById('root')
+            class TextWithoutVowels extends React.Component
+            {
+                constructor()
+                {
+                    super()
+                    this.state={
+                        text:'',
+                        output:''
+                    }
+                }
+                handleChange=(e)=>{
+                    const text=e.target.value
+                    this.setState({text})
+                    const word=text.split('')
+                    const vowels='aeiouAEIOU'
+                    let output=''
+                    for(let i=0;i<word.length;i++)
+                    {
+                        if(!vowels.includes(word[i]))
+                        {
+                            output+=word[i]
+                        }
+                    }
+                    this.setState({output})
+                }
+                render()
+                {
+                    return(
+                        <div>
+                            <h2>Text Without Vowels</h2>
+                            <h2>{this.state.output}</h2>
+                            <textarea value={this.state.text} onChange={this.handleChange}/>
+                        </div>
+                    )
+                }
+            }
+            ReactDOM.render(<TextWithoutVowels/>,rootHandle)
+        </script>
+    </body>
+</html>

@@ -1,0 +1,52 @@
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react-dom.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/babel.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/axios.js'></script>
+        <script type='text/babel'>
+            const rootHandle=document.getElementById('root')
+            class ShowUser extends React.Component
+            {
+                constructor()
+                {
+                    super()
+                    this.state={
+                        tasks:[
+                            { id: 1, title: 'db back', completed: false},
+                            { id: 2, title: 'server setup', completed: true }
+                        ]
+                    }
+                }
+                render()
+                {
+                    return(
+                        <div>
+                            <List tasks={this.state.tasks}/>
+                        </div>
+                    )
+                }
+            }
+            function List(props)
+            {
+                return(
+                    <div>
+                        <ul>
+                            {
+                                props.tasks.map((ele,i)=><li key={i}>{ele.title}</li>)
+                            }
+                        </ul>
+                    </div>
+                )
+            }
+            ReactDOM.render(<ShowUser/>,rootHandle)
+        </script>
+
+    </body>
+</html>

@@ -1,0 +1,108 @@
+<html>
+    <head>
+        <title>Table tag</title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react-dom.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/babel.js'></script>
+
+        <script type='text/babel'>
+            const rootHandle=document.getElementById('root')
+            const employees=[
+                {id:1,name:'arjun',department:'tech',email:'arjun@gmail.com'},
+                {id:2,name:'mahesh',department:'tech',email:'mahesh@gmail.com'},
+                {id:3,name:'surabhi',department:'tech',email:'surabhi@gmail.com'},
+                {id:4,name:'swaroop',department:'finance',email:'swaroop@gmail.com'},
+                {id:5,name:'vageesh',department:'finance',email:'vageesh@gmail.com'},
+            ]
+            const techEmployees=employees.filter(ele =>ele.department=='tech')
+            const financeEmployees=employees.filter(ele =>ele.department=='finance')
+            const tableTag=(
+                <div>
+                    <h2>employees - {employees.length}</h2>
+                    <table border='1'>
+                        <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>name</th>
+                                <th>department</th>
+                                <th>email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                employees.map(function(ele,i)
+                                {   return(
+                                        <tr key={i} class='1'>
+                                            <td >{ele.id}</td>
+                                            <td>{ele.name}</td>
+                                            <td>{ele.department}</td>
+                                            <td>{ele.email}</td>
+                                        </tr>
+                                    )
+                                })
+                            }
+                        </tbody>
+                    </table>
+
+                    <h2>employees (finance) - {financeEmployees.length}</h2>
+                    <table border='1'>
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>name</th>
+                            <th>department</th>
+                            <th>email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            financeEmployees.map(function(ele,i)
+                            {   return(
+                                    <tr key={i} class='1'>
+                                        <td >{ele.id}</td>
+                                        <td>{ele.name}</td>
+                                        <td>{ele.department}</td>
+                                        <td>{ele.email}</td>
+                                    </tr>
+                                )
+                            })
+                        }
+                    </tbody>
+                </table>
+                <h2>employees (tech) - {techEmployees.length}</h2>
+                    <table border='1'>
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>name</th>
+                            <th>department</th>
+                            <th>email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            techEmployees.map(function(ele,i)
+                            {   return(
+                                    <tr key={i} class='1'>
+                                        <td >{ele.id}</td>
+                                        <td>{ele.name}</td>
+                                        <td>{ele.department}</td>
+                                        <td>{ele.email}</td>
+                                    </tr>
+                                )
+                            })
+                        }
+                    </tbody>
+                </table>
+                </div>
+            )
+            ReactDOM.render(tableTag,rootHandle)
+        </script>
+
+    </body>
+</html> 

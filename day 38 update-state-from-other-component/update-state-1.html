@@ -1,0 +1,66 @@
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react-dom.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/babel.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/axios.js'></script>
+        <script type='text/babel'>
+            const rootHandle=document.getElementById('root')
+            class UpdateCounter extends React.Component
+            {
+                constructor()
+                {
+                    super()
+                    this.state={
+                        count:0 
+                    }
+                }
+                handleClick=()=>{
+                    this.setState(prevState=>({count:prevState.count+1}))
+                }
+                handleGenerate=(n)=>{
+                    this.setState({count:n})
+                }
+                render()
+                {
+                    return(
+                        <div>
+                            <Show count={this.state.count}/>
+                            <Btn hc={this.handleClick} 
+                            generate={this.handleGenerate}
+                            click={this.state.count}/>
+                        </div>
+                    )
+                }
+            }
+            function Show(props)
+            {
+                return(
+                    <div>
+                        <h2>{props.count}</h2>
+                    </div>
+                )
+            }
+            function Btn(props)
+            {
+                return(
+                    <div>
+                        <button onClick={()=>{
+                            const random=Math.round(Math.random()*100)
+                            props.generate(random)
+                        }}>generate</button>
+                        <button onClick={props.hc}>{props.click} - up</button>
+                    </div>
+                )
+            }
+            ReactDOM.render(<UpdateCounter/>,rootHandle)
+        </script>
+
+    </body>
+</html>

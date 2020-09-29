@@ -1,0 +1,73 @@
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react-dom.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/babel.js'></script>
+
+        <script type='text/babel'>
+            const rootHandle=document.getElementById('root')
+            class UserInfo extends React.Component
+            {
+                constructor()
+                {
+                    super()
+                    this.state={
+                        users:[],
+                        status:false,
+                        output:'',
+                        
+                    }
+                }
+                handleChange=(e)=>{
+                    console.log('event')
+                    const id=e.target.value
+                    
+                    this.setState({id})
+                }
+                handleSubmit=(e)=>{
+                    console.log('submit')
+                    e.preventDefault()
+                    const xhr=new XMLHttpRequest()
+                    xhr.open("GET",'http://jsonplaceholder.typicode.com/users')
+                    xhr.send()
+                    xhr.onload=()=>{
+                        const users=JSON.parse(xhr.responseText)//to convert the string to object we use parse
+                        this.setState({users})
+                        const id=this.state.id
+                        this.setState((prevState)=>{
+                            return{
+                                output:prevState.users.find(user=>user.id==id)
+                            }
+                        })
+                    }
+                }
+
+                render()
+                {
+                    return(
+                        <div>
+                            
+                            <form onSubmit={this.handleSubmit}>
+                                <input type='text'
+                                    value={this.state.id}
+                                    placeholder='search by id'
+                                    onChange={this.handleChange}
+                                />
+                                <input type='submit' value='submit'/>
+                            </form>  
+                            <h2>user details -{this.state.output.name}</h2>
+                        </div>
+                    )
+                }
+            }    
+            ReactDOM.render(<UserInfo/>,rootHandle)
+        </script>
+
+    </body>
+</html>

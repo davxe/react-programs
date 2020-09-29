@@ -1,0 +1,71 @@
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react-dom.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/babel.js'></script>
+
+        <script type='text/babel'>
+            const rootHandle=document.getElementById('root')
+            class LengthCalc extends React.Component
+            {
+                constructor()
+                {
+                    super()
+                    this.state={
+                        name:'',
+                        output:''
+                    }
+                }
+                handleNameChange = (e) => {
+                    const name = e.target.value 
+                    this.setState({ 
+                        name
+                    })
+                    const words=name.split(' ')
+                    let output='#'
+                    for(let i=0;i<words.length;i++)
+                    {
+                        output=output+words[i].charAt(0).toUpperCase()+words[i].slice(1).toLowerCase()
+                    }
+                    this.setState({output})
+                    
+                }
+
+
+                
+               
+                render()
+                {
+                    return (
+                        <div>
+                        <h2>HashTag Generator</h2>
+                        <form onSubmit={this.handleSubmit}>
+                            <label htmlFor='name'>str</label>
+                            <input 
+                                type='text'
+                                id='name'
+                                value={this.state.name}
+                                onChange={this.handleNameChange}
+                             />
+                             <br/><br/>
+                             <input type='submit' value='generate'/>
+                        
+                        </form>                 
+                        <h2>{this.state.output}</h2>
+                        
+                        
+                        </div>
+                    )
+                }
+            }
+        ReactDOM.render(<LengthCalc/>,rootHandle)    
+        </script>
+
+    </body>
+</html>

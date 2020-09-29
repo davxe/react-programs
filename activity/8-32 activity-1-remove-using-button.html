@@ -1,0 +1,82 @@
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react-dom.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/babel.js'></script>
+
+        <script type='text/babel'>
+            const rootHandle=document.getElementById('root')
+            class RemoveElement extends React.Component
+            {
+                constructor()
+                {
+                    super()
+                    this.state={
+                        users:[
+                            {id:1,name:'user1',email:'user1@gmail.com'},
+                            {id:2,name:'user2',email:'user2@gmail.com'},
+                            {id:3,name:'user3',email:'user3@gmail.com'},
+                            {id:4,name:'user4',email:'user4@gmail.com'},
+                        ]
+                    }
+                }
+                handleRemove=(name)=>{
+                    const prompt=window.prompt('enter the name to confirm')
+                    if(prompt==name)
+                    {
+                        this.setState(function(prevState)
+                        {
+                            return {
+                                users:prevState.users.filter(user=>user.name!=name)
+                            }
+                        })
+                    }
+                    else{
+                        alert('invalid name')
+                    }
+                }
+                render()
+                {
+                    return(
+                        <div>
+                            <h2>Listing Tasks-{this.state.users.length}</h2>
+                            <table border='1'>
+                                <thead>
+                                    <tr>
+                                        <th>id</th>
+                                        <th>user</th>
+                                        <th>action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {
+                                        this.state.users.map((user,i) => { 
+                                            return(  
+                                                <tr key={user.id}>
+                                                    <td>{i+1}</td>
+                                                    <td>{user.name}</td>
+                                                    <td><button onClick={()=>{
+                                                        this.handleRemove(user.name)
+                                                    }}>rermove</button></td>
+                                                </tr>
+                                            )
+                                        })
+                                    }
+                                   
+                                </tbody>
+                            </table>
+                        </div>
+                    )
+                }
+            }
+            ReactDOM.render(<RemoveElement/>,rootHandle)
+        </script>
+
+    </body>
+</html>

@@ -1,0 +1,81 @@
+<html>
+    <head>
+        <title>Form Presists</title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react-dom.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/babel.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/axios.js'></script>
+        <script type='text/babel'>
+            const rootHandle=document.getElementById('root')
+            class Presist extends React.Component
+            {
+                documentData;
+                constructor()
+                {
+                    super()
+                    this.state={
+                        title:'',
+                        area:''
+                    }
+                }
+                handleChangeTitle=(e)=>{
+                    const title=e.target.value
+                    this.setState({title})
+                }
+                handleChangeArea=(e)=>{
+                    const area=e.target.value
+                    this.setState({area})
+                }
+                handleSubmit=(e)=>{
+                    e.preventDefault()                    
+                    localStorage.setItem('key',JSON.stringify(this.state));
+                }
+                componentDidMount()
+                {
+                    this.documentData = JSON.parse(localStorage.getItem('key'));
+ 
+                    if (localStorage.getItem('key')) 
+                    {
+                        this.setState({
+                            title: this.documentData.title,
+                            area: this.documentData.area,
+                        })
+                    }
+                    else 
+                    {
+                        this.setState({
+                            title: '',
+                            area: '',
+                        })
+                    }                           
+                }
+                handleReload=()=>{
+                    document.location.reload(false);
+                }
+                render()
+                {
+                    return(
+                        <div>
+                            <h1>Story Book</h1>
+                            <form onSubmit={this.handleSubmit}>
+                                <label htmlFor='title'>Title</label><br/>
+                                <input type='text' id='title' value={this.state.title} onChange={this.handleChangeTitle}/><br/>
+                                <label htmlFor='area'>Body</label><br/>
+                                <textarea value={this.state.area} id='area' onChange={this.handleChangeArea}/><br/><br/>
+                                <button onClick={this.handleReload}>Reload</button> 
+                                <input type='submit' value='save'/>
+                            </form>
+                        </div>
+                    )
+                }
+            }
+            ReactDOM.render(<Presist/>,rootHandle)
+        </script>
+
+    </body>
+</html>

@@ -1,0 +1,48 @@
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react-dom.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/babel.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/axios.js'></script>
+        <script type='text/babel'>
+            const rootHandle=document.getElementById('root')
+            class Toogle extends React.Component
+            {
+                constructor()
+                {
+                    super()
+                    this.state={
+                        status:false
+                    }
+                }
+                handleClick=()=>{
+                    this.setState(prevState=>({status:!prevState.status}))
+                }
+                render()
+                {
+                    return(
+                        <div>
+                            <h2>{this.state.status?'onlklkxcmx,zx.cvnjjdfk;jddscvcn bhjfdjhdjdhfbjkfhfakhjbhfbjkhkrfjvhgfgrkuyyyybjhbvjbvkjhkdf':''}</h2>
+                            <ToogleShow status={this.state.status} handleClick={this.handleClick}/>
+                        </div>
+                    )
+                }
+            }            
+
+            function ToogleShow(props)
+            {
+                return(
+                    <button onClick={props.handleClick}>{props.status?'Switch off':'Switch on'}</button>
+                )
+            }
+            ReactDOM.render(<Toogle/>,rootHandle)
+        </script>
+
+    </body>
+</html>

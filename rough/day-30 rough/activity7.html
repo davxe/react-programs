@@ -1,0 +1,97 @@
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react-dom.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/babel.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/axios.js'></script>
+        <script type='text/babel'>
+            const rootHandle=document.getElementById('root')
+            class CountVowels extends React.Component
+            {
+                constructor()
+                {
+                    super()
+                    this.state={
+                        str:'',
+                        vowels:''
+                    }
+                }
+                handleChange=(e)=>{
+                    this.setState({[e.target.name]:e.target.value})
+                }
+                handleSubmit=(e)=>{
+                    e.preventDefault()
+                    const vowels={a:0,e:0,i:0,o:0,u:0}
+                    const str=this.state.str
+                    for(const char of str)
+                    {
+                        if(vowels.hasOwnProperty(char))
+                        {
+                            vowels[char]+=1
+                        }
+                    }
+                    this.setState({vowels,str:''})
+                    
+                }
+                render()
+                {
+                    return(
+                        <div>
+                            <h2>Counts Vowels</h2>
+                            <form onSubmit={this.handleSubmit}>
+                                <label htmlFor='str'>String</label>
+                                <input
+                                    type='text'
+                                    value={this.state.str}
+                                    onChange={this.handleChange}
+                                    id='str'
+                                    name='str'
+                                    placeholder='enter your string'
+                                />
+                                <input type='submit' value='count'/>
+                            </form>
+                            <TableShow vowels={this.state.vowels}/>
+                        </div>
+                    )
+                }
+            }
+            function TableShow(props)
+            {
+                return(
+                    <div>
+                        <table border='2'>
+                            <thead>
+                                <tr>
+                                    <th>a</th>
+                                    <th>e</th>
+                                    <th>i</th>
+                                    <th>o</th>
+                                    <th>u</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                            <tr>
+                                                <td>{props.vowels.a}</td>
+                                                <td>{props.vowels.e}</td>
+                                                <td>{props.vowels.i}</td>
+                                                <td>{props.vowels.o}</td>
+                                                <td>{props.vowels.u}</td>
+                                            </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                )
+            }
+            ReactDOM.render(<CountVowels/>,rootHandle)
+        </script>
+
+    </body>
+</html>

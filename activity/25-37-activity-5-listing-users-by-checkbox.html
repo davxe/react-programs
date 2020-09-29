@@ -1,0 +1,93 @@
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react-dom.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/babel.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/axios.js'></script>
+        <script type='text/babel'>
+            const rootHandle=document.getElementById('root')
+            class ShowTask extends React.Component
+            {
+                constructor()
+                {
+                    super()
+                    this.state={
+                        users:[
+                            {id:1,name:'user1'},
+                            {id:2,name:'user2'},
+                            {id:3,name:'user3'},
+                            {id:4,name:'user4'}
+                        ]
+                    }
+                }
+                handleChange=(id)=>{
+                    const output=[]
+                    const result=this.state.users.map(ele=>{
+                        if(ele.id==id)
+                        {
+                            output.push(ele.name)
+                            return output
+                        }
+                        else
+                        {
+                            output.pop(ele.name)
+                            return output
+                        }
+                    })
+                    this.setState({output:result})
+                    console.log('output',output)
+                }
+                render()
+                {
+                    return (
+                        <div>
+                            <List users={this.state.users} handleChange={this.handleChange}/>
+                        </div>
+                    )
+                }
+            }
+            function List(props)
+            {
+                return (
+                    <div>
+                        <h2>Listing Users:-{props.users.length}</h2>
+                        <table border='1'>
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>name</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    props.users.map((user,i)=>{
+                                        return(
+                                            <tr key={i}>
+                                                <td>{user.id}</td>
+                                                <td>{user.name}</td>
+                                                <td>
+                                                    <input
+                                                        type='checkbox' onChange={()=>{props.handleChange(user.id)}}
+                                                    />
+                                                </td>
+                                            </tr>
+                                        )
+                                    })
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                )
+            }
+            ReactDOM.render(<ShowTask/>,rootHandle)
+        </script>
+
+    </body>
+</html>

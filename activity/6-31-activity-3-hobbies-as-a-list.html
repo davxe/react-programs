@@ -1,0 +1,76 @@
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react-dom.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/babel.js'></script>
+
+        <script type='text/babel'>
+            const rootHandle=document.getElementById('root')
+            class MyHobbies extends React.Component
+            {
+                constructor()
+                {
+                    super()
+                    this.state={
+                        name:'',
+                        result:[]
+
+                    }
+                }
+
+                handleNameChange=(e)=>{
+                    const name=e.target.value
+                    
+                    this.setState({name})
+                }
+
+                handleSubmit=(e)=>{
+                    e.preventDefault()
+                    //const str=this.state.name
+                    this.setState(function(prevState)
+                    {
+                        return {
+                            result:prevState.result.concat(this.state.name),
+                            name:''
+                        }
+                    })
+                }
+                render()
+                {
+                    return (
+                        <div>
+                            <h2>My hobbies</h2>
+                            <form onSubmit={this.handleSubmit}>
+                                <label htmlFor='str'>string</label>
+                                <input type='text'
+                                    id='str'
+                                    value={this.state.name}
+                                    onChange={this.handleNameChange}
+                                />
+                                <br/><br/>
+
+                                <input type='submit' value='submit'/>
+                                <ul>
+                                    {
+                                        this.state.result.map(function(ele,i)
+                                        {
+                                            return <li key={i}>{ele}</li>
+                                        })
+                                    }
+                                </ul>
+                            </form>
+                        </div>
+                    )
+                }
+            }
+            ReactDOM.render(<MyHobbies/>,rootHandle)
+        </script>
+
+    </body>
+</html>

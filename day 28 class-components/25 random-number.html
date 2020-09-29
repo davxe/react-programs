@@ -1,0 +1,62 @@
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react-dom.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/babel.js'></script>
+
+        <script type='text/babel'>
+            const rootHandle=document.getElementById('root')
+
+            class Generate extends React.Component
+            { 
+                constructor()
+                {
+                    super()
+                    this.state=
+                    {
+                        number:"",
+                        nums:[]
+                    }
+                }
+
+                handleGenerate=()=>
+                {
+                    const random=Math.round(Math.random()*100)
+                    this.setState(function(prevState)
+                    {
+                        return {
+                        number:random,
+                        nums:prevState.nums.concat(random)
+                        }
+                    })
+                }                
+                render()
+                {
+                    return (
+                    <div>
+                    <h2>Random Numbers - {this.state.number}</h2>
+                    <button onClick={this.handleGenerate}>Generate</button>
+                    <hr/>
+                    <h2>Random Numbers generate so far - {this.state.nums.length}</h2>
+                    <ul>
+                        {
+                            this.state.nums.map(function(ele,i)
+                            {
+                                return <li key={i}>{ele}</li>                                
+                            })
+                        }
+                    </ul>
+                    </div>
+                    )
+                }               
+            }
+            ReactDOM.render(<Generate/>,rootHandle)
+        </script>
+    </body>
+</html>

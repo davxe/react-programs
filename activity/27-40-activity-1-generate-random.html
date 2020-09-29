@@ -1,0 +1,67 @@
+<html>
+    <head>
+        <title></title>
+        <style>
+            div{
+                text-align: center;
+            }
+            input{
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react-dom.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/babel.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/axios.js'></script>
+        <script type='text/babel'>
+            const rootHandle=document.getElementById('root')
+            class Random extends React.Component
+            {
+                constructor()
+                {
+                    super()
+                    this.state={
+                        random:'',
+                        list:[]
+                    }
+                }
+                handleRandom=(random)=>{
+                    this.setState(prevState=>{
+                        return{
+                            list:prevState.list.concat(random)
+                        }
+                    })
+                }
+                render()
+                {
+                    return(
+                        <div>
+                            <h2>Random's</h2>
+                            {
+                                this.state.list.map((ele,i)=>{
+                                    return (
+                                        <div key={i}>
+                                            <input type='text' defaultValue={ele} />
+                                            <br/>
+                                        </div>
+                                    )
+                                })
+                            }
+                            <button onClick={()=>{
+                                const random=Math.round(Math.random()*100)
+                                this.handleRandom(random)
+                            }}>Generate Random</button>
+                        </div>
+                    )
+                }
+            }
+            ReactDOM.render(<Random/>,rootHandle)
+        </script>
+
+    </body>
+</html>

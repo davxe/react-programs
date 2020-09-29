@@ -1,0 +1,78 @@
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react-dom.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/babel.js'></script>
+
+        <script type='text/babel'>
+            const rootHandle=document.getElementById('root')
+            class MarkTable extends React.Component
+            {
+                constructor()
+                {
+                    super()
+                    this.state={
+                            task:[
+                            {id:1,title:'develop Ui',completed:false},
+                            {id:2,title:'develop app',completed:false},
+                            {id:3,title:'take client features',completed:false}
+                            ]
+                        }
+                }
+                render()
+                {
+                    console.log(this.state)
+                    return(
+                        <div>
+                            <h2>Mark all as complete</h2>
+                            <table border='1'>
+                                <thead>
+                                    <tr>
+                                        <th><input type='checkbox' onChange={this.handleComplete}/></th>
+                                        <th>title</th>
+                                        <th>status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>   
+                                    {
+                                        this.state.task.map(function(ele,i)
+                                        {
+                                            return (
+                                                <tr key={i}>
+                                                    <td><input type='checkbox' checked={ele.completed} disabled={true}/></td>
+                                                    <td>{ele.title}</td>
+                                                    <td>
+                                                        {ele.completed==true?`completed`:`pending`} 
+                                                    </td>
+                                                </tr>  
+                                            )                                  
+                                        })
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    )
+                }
+                handleComplete=()=>{
+                this.setState(function(prevState)
+                {
+                    return {
+                        task:prevState.task.map(function(task)
+                        {
+                            return Object.assign({},task,{completed:!task.completed})
+                        })
+                    }
+                })
+            }
+            }
+            ReactDOM.render(<MarkTable/>,rootHandle)
+        </script>
+
+    </body>
+</html>

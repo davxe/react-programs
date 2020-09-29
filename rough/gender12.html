@@ -1,0 +1,63 @@
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react-dom.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/babel.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/axios.js'></script>
+        <script type='text/babel'>
+            const rootHandle=document.getElementById('root')
+            class Gender extends React.Component
+            {
+                constructor()
+                {
+                    super()
+                    this.state={
+                        gender:{},
+                        name:'',
+                        status:true
+                    }
+                }
+                handleChange=(e)=>{
+                    const name=e.target.value
+                    this.setState({name})
+                }
+                handleSubmit=(e)=>{
+                    e.preventDefault()
+                    axios.get(`https://api.genderize.io?name=${this.state.name}`)
+                    .then(response=>{
+                        console.log(response.data)
+                        const gender=response.data
+                        this.setState({gender,status:false})
+                    })
+                    .catch(err=>{
+                        console.log(err)
+                    })
+                }
+                render()
+                {
+                    console.log(this.state)
+                    return(
+                        <div>
+                            <h2>Determine Gender</h2>
+                            <form onSubmit={this.handleSubmit}>
+                                <label htmlFor='name/'>Name</label>
+                                <input type='text' id='name' value={this.state.name} onChange={this.handleChange}/>
+                                <input type='submit' value='submit'/>
+                            </form>
+                            <h2>{this.state.status?'':`Name:${this.state.name}`}</h2>
+                            <h2>{this.state.status?'':`Gender:${this.state.gender.gender}`}</h2>
+                        </div>
+                    )
+                }
+            }
+            ReactDOM.render(<Gender/>,rootHandle)
+        </script>
+
+    </body>
+</html>

@@ -1,0 +1,156 @@
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react-dom.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/babel.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/axios.js'></script>
+        <script type='text/babel'>
+            const rootHandle=document.getElementById('root')
+            class AddData extends React.Component
+            {
+                constructor(props)
+                {
+                    super(props)
+                    this.state={
+                        tasks:[
+                            { id: 1, title: 'db back', completed: false},
+                            { id: 2, title: 'server setup', completed: true }
+                        ],text:''
+                    }
+                }
+                render()
+                {
+                    console.log('parent',this.state)
+                    return(
+                        <div>
+                            <Add tasks={this.state.tasks} text={this.state.text}/>
+                        </div>
+                    )
+                }
+            }
+            function TableTasks(props)
+            {
+                return(
+                    <div>
+                        <table border='1'>
+                            <thead>
+                                <tr>
+                                    <th>id</th>
+                                    <th>title</th>
+                                    <th>completed</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    props.tasks.map((ele,i)=>{
+                                        return (
+                                            <tr key={ele.id}>
+                                                <td>{i+1}</td>
+                                                <td>{ele.title}</td>
+                                                <td>
+                                                    <input 
+                                                        type='checkbox' 
+                                                        checked={ele.completed} 
+                                                        onChange={()=>{props.handleUpdate(ele.id)}}
+                                                    />
+                                                    <button 
+                                                        onClick={()=>{
+                                                        console.log('child',ele.id)
+                                                        props.handleClick(ele.id)}
+                                                        }>remove
+                                                    </button> 
+                                                    <button 
+                                                        onClick={()=>{props.handleShow(ele)}}>show
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        )    
+                                    })
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                )
+            }
+            class Add extends React.Component
+            {
+                constructor(props)
+                {
+                    super(props)
+                    this.state={
+                        tasks:props.tasks,
+                        text:props.text
+                    }
+                }
+                    
+                handleChange=(e,props)=>{
+                    const text=e.target.value
+                    this.setState({text:text})
+                }
+                handleSubmit=(e,props)=>{
+                    e.preventDefault()
+                    const task={
+                        id:this.state.tasks.length+1,
+                        title:this.state.text,
+                        completed:false
+                    }
+                    this.setState(prevState=>({tasks:prevState.tasks.concat(task),title:''}))
+                }
+                handleClick=(id)=>{
+                    console.log('parent',id)
+                    const res=confirm('are you sure')
+                    if(res)
+                    {
+                        this.setState(prevState=>{
+                            return{
+                                tasks:prevState.tasks.filter(task=>task.id!=id)
+                            }
+                        })
+                    }
+                }
+                handleShow=(task)=>{
+                    alert(`id=${task.id} title=${task.title} completed=${task.completed}`)
+                }
+                
+                handleUpdate=(id)=>{
+                    this.setState(prevState=>{
+                        return{
+                            tasks:prevState.tasks.map(task=>{
+                                if(task.id==id)
+                                {
+                                    return Object.assign({},task,{completed:!task.completed})
+                                }
+                                else
+                                {
+                                    return Object.assign({},task)
+                                }
+                            })
+                        }
+                    })
+                }
+                render()
+                {
+                    console.log('child',this.state)
+                    return(
+                        <div>
+                            <h2>Add Task</h2>
+                            <form onSubmit={this.handleSubmit}>
+                                <input type='text' value={this.state.text} onChange={this.handleChange}/>
+                                <input type='submit' value='submit'/>
+                            </form>
+                            <TableTasks tasks={this.state.tasks} handleClick={this.handleClick} handleShow={this.handleShow} handleUpdate={this.handleUpdate}/>
+                        </div>
+                    )
+                }
+            }  
+            ReactDOM.render(<AddData/>,rootHandle)
+        </script>
+
+    </body>
+</html>

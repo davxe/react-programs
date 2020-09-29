@@ -1,0 +1,53 @@
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react-dom.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/babel.js'></script>
+
+        <script type='text/babel'>
+            const rootHandle=document.getElementById('root')
+            class Calculator extends React.Component
+            {
+                constructor()
+                {
+                    super()
+                    this.state={
+                        miles:0,
+                        km:0
+                    }
+                }
+                changeValue=(event)=>{
+                    this.setState(
+                    {
+                        miles:event.target.value
+                    })
+                    this.setState(function(prevState)
+                    {
+                        return {
+                            km:prevState.miles*1.6
+                        }
+                    })
+                }
+                render()
+                {
+                    return(
+                        <div>
+                            <h2>Distance Calculator</h2>
+                            <h2>kms - {this.state.km.toFixed(2)}</h2>
+                            <h2>miles - {this.state.miles}</h2>
+                            <input type='range' id='volume' min='0' max='100' step='1' value={this.state.miles} onChange={this.changeValue}></input>
+                       </div>
+                    )
+                }
+            }
+            ReactDOM.render(<Calculator/>,rootHandle)
+        </script>
+
+    </body>
+</html>

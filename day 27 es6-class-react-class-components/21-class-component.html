@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react-dom.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/babel.js'></script>
+
+        <script type='text/babel'>
+            const rootHandle=document.getElementById('root')
+            //in react class we always extends React.Component and we have to use render() it is necessary
+            class Person extends React.Component{
+                render()//->it is responsible for UI
+                {
+                    return <h1>I'm a class component</h1>
+                }
+            }
+            ReactDOM.render(<Person/>, rootHandle)
+        </script>
+
+    </body>
+</html>

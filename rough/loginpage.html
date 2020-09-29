@@ -1,0 +1,81 @@
+<html>
+    <head>
+        <title>LoginPage</title>
+    </head>
+    <body></body>
+        <div id="root">
+
+        </div>
+        <style>
+            form{
+                text-align: center;
+                background-color: cyan;
+
+            }
+            body{
+                text-align: center;
+                background-color: blueviolet;
+
+            }
+            input{
+                text-align: justify;
+                color:white;
+                background-color: darkmagenta;
+            }
+            label{
+                text-align: justify;
+            }
+        </style>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react-dom.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/babel.js'></script>
+
+        <script type='text/babel'>
+            const rootHandle=document.getElementById('root')
+            class Login extends React.Component
+            {
+                constructor()
+                {
+                    super()
+                    this.state={
+                        name:'',
+                        password:'',
+                        status:false
+                    }
+                }
+                handleChange=(event)=>{
+                    this.setState({
+                        [event.target.name]:event.target.value
+                    })   
+                }
+                handleChecked=()=>{
+                    this.setState(prevState=>({status:!prevState.status}))
+                }
+                handleSubmit=(e)=>{
+                    e.preventDefault()
+                    const password=this.state.value
+                    const name=this.state.value
+                    console.log(name)
+                }
+
+                render()
+                {
+                    return (
+                        <div>
+                            <h2>Login Page</h2>
+                            <form onSubmit={this.handleSubmit}>
+                            <label htmlFor='name'>Username</label>
+                            <input type='text' id='name' name='name' value={this.state.name} onChange={this.handleChange}/><br/><br/>
+                            <label htmlFor='password'>Password</label>
+                            <input type={this.state.status?'text':'password'} id='password' name='password' value={this.state.password} onChange={this.handleChange}/><br/>
+                            <input type='checkbox' id='check' onChange={this.handleChecked}/><label htmlFor='check'>show password</label><br/>
+                            <input type='submit' value='login'/>
+                            </form>
+                        </div>
+                    )
+                }
+            }
+            ReactDOM.render(<Login/>,rootHandle)
+        </script>
+    </body>
+</html>

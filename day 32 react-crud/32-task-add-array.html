@@ -1,0 +1,100 @@
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <div id="root">
+        </div>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react-dom.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/babel.js'></script>
+        <script type='text/babel'>
+            const rootHandle=document.getElementById('root')
+            class TasksList extends React.Component {
+            constructor() {
+                super() 
+                this.state = {
+                    tasks: [
+                        { id: 1, title: 'db back', completed: false},
+                        { id: 2, title: 'server setup', completed: true }
+                    ],
+                    title:''
+                }
+            }
+            handleClick=(task)=>{
+                console.log(task)
+                alert(`id - ${task.id}, title - ${task.title}, completed - ${task.completed}`)
+            }
+            handleRemove=(id)=>{
+                const confirm=window.confirm('are you sure ?')
+                if(confirm)
+                {
+                    this.setState(function(prevState)
+                    {
+                        return {
+                            tasks:prevState.tasks.filter( task => task.id != id)
+                        }
+                    })
+                }
+            }
+            handleTitleChange=(e)=>{
+                const title=e.target.value
+                this.setState({title})
+            }
+            handleSubmit=(e)=>{
+                e.preventDefault()
+                const task={
+                    id:Number(new Date()),
+                    title:this.state.title,
+                    completed:false
+                }
+                this.setState((prevState)=>{
+                    return {
+                        tasks:prevState.tasks.concat(task),//adding to the end of the list
+                        //tasks:[task].concat(prevState.tasks)//adding to the begining of the list
+                        title:''
+                    }
+                })
+            }           
+            render() {
+                return (
+                    <div> 
+                        <h2> Listing Tasks - { this.state.tasks.length } </h2> 
+                        <table border="1">
+                            <thead>
+                                <tr>
+                                    <th> sl no </th> 
+                                    <th> title </th> 
+                                    <th> actions </th> 
+                                </tr> 
+                            </thead> 
+                            <tbody>
+                                {
+                                    this.state.tasks.map((task, i) => {
+                                        return (
+                                            <tr key={task.id}>
+                                                <td> { i + 1} </td> 
+                                                <td> { task.title } </td> 
+                                                <td><button onClick={()=>{
+                                                    this.handleClick(task)
+                                                }}>show</button><button onClick={()=>{this.handleRemove(task.id)}}>remove</button></td> 
+                                            </tr> 
+                                        )
+                                    })
+                                }
+                            </tbody> 
+                        </table> 
+                        <h2>Add Task</h2>
+                        <form onSubmit={this.handleSubmit}>
+                            <label htmlFor='title'>title</label>
+                            <input type='text' id='title' value={this.state.title} onChange={this.handleTitleChange}/>
+                            <input type='submit' value='add'/>
+                        </form>
+                    </div> 
+                )
+            }
+        }
+        ReactDOM.render(<TasksList />, rootHandle)
+        </script>
+    </body>
+</html>

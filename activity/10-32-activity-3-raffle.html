@@ -1,0 +1,90 @@
+<html>
+    <head>
+        <title></title>
+        <style>
+            div{
+                text-align: center;
+            }
+            input {
+                text-align: center;
+            }
+            button{
+                background-color: blue;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react-dom.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/babel.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/axios.js'></script>
+        <script type='text/babel'>
+            const rootHandle=document.getElementById('root')
+            class Raffle extends React.Component
+            {
+                constructor()
+                {
+                    super()
+                    this.state={
+                        users:['john','doe','smith','dhoni'],
+                        show:'-',
+                        value:'',
+                        status:false
+                    }
+                }
+                handleClick=()=>{
+                    const users=this.state.users
+                    const index = Math.round(Math.random() *users.length-1 ); 
+                    const value = users[index];
+                    if(users.length==0)
+                    {
+                        this.setState(prevState=>{
+                            return{
+                                value:'No users to show',
+                                status:true
+                            }
+                        })
+                    }
+                    else
+                    {
+                        this.setState(prevState=>{
+                            return{
+                                users:prevState.users.filter((ele,i)=>i!=index),
+                                show:value,
+                            }
+                        })
+
+                    }
+                    console.log('users',users)
+                    console.log('index',index)
+                    console.log('value',value)
+                }
+                render()
+                {
+                    return(
+                        <div>
+                            <h2>{this.state.show}</h2>
+                            <h2>Users</h2>                            
+                            {
+                                this.state.users.map((ele,i)=>{
+                                    return (
+                                        <div>
+                                            <input type='text' key={i} value={ele} /><br/>
+                                        </div>    
+                                    )
+                                })
+                            }    
+                            <p>{this.state.status?`${this.state.value}`:''}</p>
+                            <input type='button' onClick={this.handleClick} disabled={this.state.status?`disabled`:''} value='DRAW'/>                        
+                        </div>
+                    )
+                }
+            }
+            ReactDOM.render(<Raffle/>,rootHandle)
+        </script>
+
+    </body>
+</html>

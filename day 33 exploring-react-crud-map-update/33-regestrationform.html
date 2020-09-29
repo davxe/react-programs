@@ -1,0 +1,111 @@
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react-dom.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/babel.js'></script>
+
+        <script type='text/babel'>
+            const rootHandle=document.getElementById('root')
+            class FormSubmittion extends React.Component
+            {
+                constructor()
+                {
+                    super()
+                    this.state={
+                        name:'',
+                        email:'',
+                        password:'',
+                        text:'',
+                        gender:''
+                    }
+                }
+                handleChangeName=(event)=>{
+                    const name=event.target.value
+                    this.setState({name})
+                }
+                handleChangeEmail=(event)=>{
+                    const email=event.target.value
+                    this.setState({email})
+                }
+                handleChangePassword=(event)=>{
+                    const password=event.target.value
+                    this.setState({password})
+                }
+               
+                handleChangeBio=(event)=>{
+                    const text=event.target.value
+                    this.setState({text})
+                }
+                handleChangeGender=(gender)=>{
+                    this.setState({gender})
+
+                }
+                render()
+                {
+                    console.log(this.state)
+                    return (
+                        <div>
+                            <h1>Registration Form</h1>
+                            <form>
+                                <label htmlFor="name">UserName:</label>
+                                <input type='text'
+                                    id='name' 
+                                    value={this.state.name} 
+                                    onChange={this.handleChangeName}
+                                /> <br/>
+
+                                <label htmlFor="email">Email:</label>
+                                <input type='text' 
+                                    id='email' 
+                                    value={this.state.email} 
+                                    onChange={this.handleChangeEmail}
+                                /> <br/>
+
+                                <label htmlFor="pass">Password:</label>
+                                <input type='password' 
+                                    id='pass' 
+                                    value={this.state.password} 
+                                    onChange={this.handleChangePassword}
+                                /><br/>
+                                <label htmlFor="bio">Bio:</label>
+                                <textarea 
+                                    id='bio' 
+                                    value={this.state.text} 
+                                    onChange={this.handleChangeBio}>
+                                </textarea> <br/>
+                                <input type='radio' 
+                                    name='gender' 
+                                    id='genderM' 
+                                    value={this.state.gender}
+                                    onChange={()=>{
+                                        this.handleChangeGender('male')
+                                    }}
+                                    checked={this.state.gender=='male'}
+                                />
+                                <label htmlFor='genderM' value="male">male</label>
+
+                                <input type='radio' 
+                                    name='gender' 
+                                    id='genderF' 
+                                    value={this.state.gender}
+                                    onChange={()=>{
+                                        this.handleChangeGender('female')
+                                    }}
+                                    checked={this.state.gender=='female'}
+                                />
+                                <label htmlFor='genderF' value="female">Female</label>
+                            </form>
+                        </div>
+                    )
+                }
+            }
+            ReactDOM.render(<FormSubmittion/>,rootHandle) 
+        </script>
+    </body>
+</html>

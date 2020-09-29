@@ -1,0 +1,52 @@
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react-dom.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/babel.js'></script>
+
+        <script type='text/babel'>
+            const rootHandle=document.getElementById('root')
+            class Login extends React.Component {
+            constructor() {
+                super() 
+                this.state = {
+                    email: '',
+                    password: ''
+                }
+            }
+            handleChecked=(e)=>{
+                console.log(e.target.name,e.target.value)
+                this.setState({
+                    [e.target.name]:e.target.value
+                })
+            }
+
+
+            
+            render() {
+                return (
+                    <div> 
+                        <h2> Login Form </h2> 
+                        <form> 
+                            <label htmlFor="email"> email </label> 
+                            <input type="text" id="email" name='email' value={this.state.email} onChange={this.handleChecked} /> <br/> 
+
+                            <label htmlFor="password"> password </label>
+                            <input type="password" id="password" name='password' value={this.state.password} onChange={this.handleChecked} /> <br /> 
+
+                        </form> 
+                    </div> 
+                )
+            }
+        }
+            ReactDOM.render(<Login/>,rootHandle)
+        </script>
+
+    </body>
+</html>

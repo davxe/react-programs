@@ -1,0 +1,54 @@
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react-dom.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/babel.js'></script>
+
+        <script type='text/babel'>
+            const rootHandle=document.getElementById('root')
+            /*
+            let number=10
+            console.log(number)
+            delay execution of code - function gets called only once
+            setTimeout(function()
+            {
+                console.log('hiii there ')
+                number=20
+                console.log(number)
+            },1000)
+            
+            * when we render something into the string if the value of the variable changes it will not show the changed value one more time
+            * whenever we render into a web page it would render only once if value changed it not automatically update the changed value we have to re-render it
+
+            how to re-render ?
+
+            let number=10
+            const ele=<h1>{number}</h1>
+            setTimeOut(()=>
+            {
+                number=20
+                const ele=<h1>{number}</h1>-=rerendering
+                ReactDOM.render(ele,rootHandle)-=rerendering
+            },2500)
+            ReactDOM.render(ele,rootHandle)
+
+            function components are ment for presentation like in swiggy resturant each time we click on a resturant the call that function
+            */let number=10
+            const ele=<h1>{number}</h1>
+            setTimeout(()=>
+            {
+                number=Math.round(Math.random()*100)
+                const ele=<h1>{number}</h1>
+                ReactDOM.render(ele,rootHandle)
+            },2500 )
+            ReactDOM.render(ele,rootHandle)
+        </script>
+
+    </body>
+</html>

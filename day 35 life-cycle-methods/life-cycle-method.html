@@ -1,0 +1,52 @@
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react-dom.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/babel.js'></script>
+
+        <script type='text/babel'>
+            const rootHandle=document.getElementById('root')
+            class Greet extends React.Component {
+            constructor() {
+                console.log('constructor gets called')
+                super() 
+                this.state = {
+                    count: 0 
+                }
+            }
+
+            handleClick = () => {
+                console.log('handleclick gets called')
+                this.setState(prevState => ({ 
+                    count: prevState.count + 1
+                }))
+            }
+            componentDidMount(){// immediately called once after render method gets executed
+                console.log('component did mount called')
+            }
+         
+            render() {
+                console.log('render method gets called')
+                return (
+                    <div> 
+                        <h1>Greet component </h1> 
+
+                        <h1> { this.state.count } </h1> 
+
+                        <button onClick={this.handleClick}> up </button> 
+                    </div> 
+                )
+            }
+        }
+
+        ReactDOM.render(<Greet />, rootHandle)
+        </script>
+
+    </body>
+</html>

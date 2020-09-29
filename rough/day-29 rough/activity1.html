@@ -1,0 +1,99 @@
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react-dom.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/babel.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/axios.js'></script>
+        <script type='text/babel'>
+            const rootHandle=document.getElementById('root')
+            class RadioButton extends React.Component
+            {
+                constructor()
+                {
+                    super()
+                    this.state={
+                        tasks:[
+                            {id:1,name:'user1',email:'user1@gmail.com'},
+                            {id:2,name:'user2',email:'user2@gmail.com'},
+                            {id:3,name:'user3',email:'user3@gmail.com'},
+                            {id:4,name:'user4',email:'user4@gmail.com'},
+                        ],
+                        type:''
+                    }
+                }
+                handleChange=(e)=>{
+                    const type=e.target.value
+                    this.setState({type})
+                }
+
+                render()
+                {
+                    return(
+                        <div>
+                            <div onChange={this.handleChange}>
+                                <input type='radio' value='List' name='show' defaultChecked/>List
+                                <input type='radio' value='Table' name='show'/>Table
+                            </div>
+                            {
+                                this.state.type=='Table'?<Table tasks={this.state.tasks}/>:<List tasks={this.state.tasks}/>
+                            }
+                        </div>
+                    )
+                }
+            }
+            function List(props)
+            {
+                return(
+                    <div>
+                    <h2>Listing tasks - {props.tasks.length}</h2>
+                        <ul>
+                            {
+                                props.tasks.map((ele,i)=>{
+                                    return <li key={i}>{ele.name} - {ele.email}</li>
+                                })
+                            }
+                        </ul>
+                    </div>
+                )
+            }
+            function Table(props)
+            {
+                return(
+                    <div>
+                        <h2>Listing tasks - {props.tasks.length}</h2>
+                        <table border='1'>
+                            <thead>
+                                <tr>
+                                    <th>id</th>
+                                    <th>name</th>
+                                    <th>email</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    props.tasks.map((ele,i)=>{
+                                        return(
+                                            <tr key={i}>
+                                                <td>{ele.id}</td>
+                                                <td>{ele.name}</td>
+                                                <td>{ele.email}</td>
+                                            </tr>
+                                        )
+                                    })
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                )
+            }
+            ReactDOM.render(<RadioButton/>,rootHandle)
+        </script>
+
+    </body>
+</html>

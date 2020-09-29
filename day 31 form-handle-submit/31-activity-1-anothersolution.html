@@ -1,0 +1,59 @@
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react-dom.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/babel.js'></script>
+
+        <script type='text/babel'>
+            const rootHandle=document.getElementById('root')
+            class NameLength extends React.Component 
+            {
+                constructor() {
+                    super() 
+                    this.state = {
+                        name: '',
+                        output: ''
+                    }
+                }
+
+                handleNameChange = (e) => {
+                    const name = e.target.value 
+                    this.setState({ 
+                        name,
+                        output: ''
+                    })
+                }
+
+                handleSubmit = (e) => {
+                    e.preventDefault() 
+                    const output = `your name is ${this.state.name} (${this.state.name.length})`
+                    this.setState({ output })
+                }
+
+                render() {
+                    return (
+                        <div>
+                            <h1>Length Calc</h1> 
+
+                            <form onSubmit={this.handleSubmit}>
+                                <label htmlFor="name" > Name </label> 
+                                <input type="text" id="name" value={this.state.value} onChange={this.handleNameChange} /> 
+                                <input type="submit" value="enter name" /> 
+                            </form> 
+
+                            <h2> { this.state.output } </h2> 
+                        </div> 
+                    )
+                }
+            }
+            ReactDOM.render(<NameLength />, rootHandle)
+        </script>
+
+    </body>
+</html>

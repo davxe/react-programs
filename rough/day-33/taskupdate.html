@@ -1,0 +1,141 @@
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react-dom.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/babel.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/axios.js'></script>
+        <script type='text/babel'>
+            const rootHandle=document.getElementById('root')
+            class TaskList extends React.Component
+            {
+                constructor()
+                {
+                    super()
+                    this.state={
+                        tasks:[
+                            {id:1,title:'db backup',completed:true},
+                            {id:2,title:'server setup', completed:false}
+                        ],
+                        title:''
+                    }
+                }
+                handleClick=(task)=>{
+                    window.alert(`id - ${task.id} title - ${task.title} completed - ${task.completed}`)
+                }
+                handleRemove=(id)=>{
+                    const confirm=window.confirm('are you sure')
+                    if(confirm)
+                        this.setState(prevState=>({tasks:prevState.tasks.filter(tasks=>tasks.id!=id)}))
+                }
+                handleChange=(e)=>{
+                    const title=e.target.value
+                    this.setState({title})
+                }
+                handleSubmit=(e)=>{
+                    e.preventDefault()
+                    const task={
+                        id:this.state.tasks.length+1,
+                        title:this.state.title,
+                        completed:false
+                    }
+                    this.setState(prevState=>{
+                        return{
+                            tasks:prevState.tasks.concat(task),
+                            title:''
+                        }
+                    })
+                }
+                handleUpdate=(id)=>{
+                    this.setState(prevState=>{
+                        return{
+                            tasks:prevState.tasks.map(task=>{
+                                if(task.id==id)
+                                {
+                                    return Object.assign({},task,task.completed=!task.completed)
+                                }
+                                else
+                                {
+                                    return Object.assign({},task)
+                                }
+                            })
+                        }
+                    })
+                }
+                render()
+                {
+                    console.log(this.state)
+                    return(
+                        <div>
+                            <h2>Listing Tasks - {this.state.tasks.length}</h2>
+                            <ShowTable tasks={this.state.tasks} handleClick={this.handleClick} handleRemove={this.handleRemove} handleUpdate={this.handleUpdate}/>
+                            <Add title={this.state.title} onChange={this.handleChange} onSubmit={this.handleSubmit}/>
+                        </div>
+                    )
+                }
+            }
+            function ShowTable(props)
+            {
+                return(
+                    <div>
+                        <table border='2'>
+                            <thead>
+                                <tr>
+                                    <th>id</th>
+                                    <th>title</th>
+                                    <th>status</th>
+                                    <th>action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    props.tasks.map((ele,i)=>{
+                                        return(
+                                            <tr key={i}>
+                                                <td>{ele.id}</td>
+                                                <td>{ele.title}</td>
+                                                <td>{ele.completed?'completed':'on-going'}</td>
+                                                <td>
+                                                    <button onClick={()=>{
+                                                        props.handleClick(ele)
+                                                    }}>show</button>
+                                                    <button onClick={()=>{
+                                                        props.handleRemove(ele.id)
+                                                    }}>remove</button>
+                                                    <input 
+                                                        type='checkbox' 
+                                                        checked={ele.completed} 
+                                                        onChange={()=>{
+                                                            props.handleUpdate(ele.id)
+                                                        }}
+                                                    />
+                                                </td>
+                                            </tr>
+                                        )
+                                    })
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                )
+            }
+            function Add(props)
+            {
+                return(
+                    <div>
+                        <form onSubmit={props.onSubmit}>
+                            <input type='text' value={props.title} onChange={props.onChange}/>
+                            <input type='submit' value='submit'/>
+                        </form>
+                    </div>
+                )
+            }
+            ReactDOM.render(<TaskList/>,rootHandle)
+        </script>
+    </body>
+</html>

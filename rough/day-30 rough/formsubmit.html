@@ -1,0 +1,102 @@
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react-dom.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/babel.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/axios.js'></script>
+        <script type='text/babel'>
+            const rootHandle=document.getElementById('root')
+            class FormData extends React.Component
+            {
+                constructor()
+                {
+                    super()
+                    this.state={
+                        name:'',
+                        email:'',
+                        password:'',
+                        output:false,
+                        output1:false,
+                        output2:false
+                    }
+                }
+                handleChange=(e)=>{
+                    this.setState({[e.target.name]:e.target.value})
+                }
+                handleSubmit=(e)=>{
+                    e.preventDefault()
+                    const data={
+                        name:this.state.name,
+                        email:this.state.email,
+                        password:this.state.password
+                    }
+                    console.log(data)
+                    if(this.state.name.length==0)
+                    {
+                        this.setState({output:true})
+                    }
+                    if(this.state.email.length==0)
+                    {
+                        this.setState({output1:true})
+                    }
+                    if(this.state.password.length==0)
+                    {
+                        this.setState({output2:true})
+                    }
+
+                }
+                render()
+                {
+                    return(
+                        <div>
+                            <form onSubmit={this.handleSubmit}>
+                                <label htmlFor='name'>Name:</label>
+                                <input
+                                    type='text'
+                                    id='name'
+                                    name='name'
+                                    value={this.state.name}
+                                    onChange={this.handleChange}
+                                    placeholder='enter your name'
+                                />
+                                <p>{this.state.output?'name not empty':''}</p>
+                                <label htmlFor='email'>Email:</label>
+                                <input
+                                    type='text'
+                                    id='email'
+                                    name='email'
+                                    value={this.state.email}
+                                    onChange={this.handleChange}
+                                    placeholder='enter your email'
+                                />
+                                <p>{this.state.output1?'email not empty':''}</p>
+                                <label htmlFor='password'>Password:</label>
+                                <input
+                                    type='password'
+                                    id='password'
+                                    name='password'
+                                    value={this.state.password}
+                                    onChange={this.handleChange}
+                                    placeholder='enter your password'
+                                />
+                                <p>{this.state.output2?'password not empty':''}</p>
+                                <input 
+                                    type='submit'
+                                    value='SignUp'
+                                />
+                            </form>
+                        </div>
+                    )
+                }
+            }
+            ReactDOM.render(<FormData/>,rootHandle)
+        </script>
+
+    </body>
+</html>

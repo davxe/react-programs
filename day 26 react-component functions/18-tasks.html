@@ -1,0 +1,68 @@
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react-dom.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/babel.js'></script>
+
+        <script type='text/babel'>
+            const rootHandle=document.getElementById('root')
+            const tasks=[
+                {id:1,title:'server maintainance',completed:true},
+                {id:2,title:'server deploy',completed:false},
+                {id:3,title:'db config',completed:false}
+        ]
+        const onGoing=tasks.filter(ele=>ele.completed==false)
+        const completed=tasks.filter(ele=>ele.completed==true)
+        function TaskTable(props)
+        {
+            return (
+            <div background-color='blue'>
+                <h2>Listing Tasks -{tasks.length}</h2>
+                {
+                    props.tasks.map(function(ele)
+                    {
+                       return (
+                           <p key={ele.id}> {ele.completed==true?`completed - ${completed.length} , ongoing - ${onGoing.length}`:``} </p>
+                        
+                       )
+                    })
+                }
+                <table border='1'>
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>title</th>
+                            <th>status</th>
+                        </tr>
+                    </thead>
+                    <tbody>   
+                        {
+                            props.tasks.map(function(ele)
+                            {
+                                return (
+                                <tr key={ele.id}>
+                                    <td>{ele.id}</td>
+                                    <td>{ele.title}</td>
+                                    <td>{ele.completed==true?`completed`:`onGoing`} </td>
+                                </tr>  
+                                )                                  
+                            })
+                        }
+                    </tbody>
+                </table> 
+                
+                <progress max={tasks.length} value={completed.length}>{completed.length}</progress>     
+            </div>
+            )
+        }    
+          ReactDOM.render(<TaskTable tasks={tasks}/>,rootHandle)  
+        </script>
+
+    </body>
+</html>

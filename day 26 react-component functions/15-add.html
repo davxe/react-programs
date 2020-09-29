@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react-dom.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/babel.js'></script>
+
+        <script type='text/babel'>
+            const rootHandle=document.getElementById('root')
+
+            function sum(a,b)
+            {
+                return a+b
+            }
+
+            function Add(props)
+            {
+                return <h1>{sum(props.a,props.b)}</h1>
+            }
+            ReactDOM.render(<Add a={10} b={20}/>,rootHandle)
+            
+        </script>
+
+    </body>
+</html>

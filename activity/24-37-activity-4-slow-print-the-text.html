@@ -1,0 +1,62 @@
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react-dom.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/babel.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/axios.js'></script>
+        <script type='text/babel'>
+            const rootHandle=document.getElementById('root')
+            class PrintSlow extends React.Component
+            {
+                constructor()
+                {
+                    super()
+                    this.state={
+                        text:'This is a text....',
+                        result:''
+                    }
+                }
+                
+                slowPrintTheText=()=>{
+                    const str=this.state.text
+                    console.log(str)
+                    for(let i=0;i<str.length;i++)
+                    {
+                        console.log(str.charAt(i))
+                        this.setState(prevState=>{
+                            return {
+                                result:prevState.result.concat(str.charAt(i))
+                            }
+                        }) 
+                        if(i>=str.length)
+                        {
+                            break
+                        }                          
+                    }
+                  
+                }
+                componentDidMount(){
+                    const inter=setInterval(this.slowPrintTheText,500)
+                    setTimeout(() => { clearInterval(inter)}, 1000);
+                }
+                render()
+                {
+                    
+                    return(
+                        <div>
+                            <h2>{this.state.result}</h2>   
+                        </div>
+                    )
+                }
+            }
+            ReactDOM.render(<PrintSlow/>,rootHandle)
+        </script>
+
+    </body>
+</html>

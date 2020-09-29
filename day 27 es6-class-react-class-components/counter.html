@@ -1,0 +1,91 @@
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react-dom.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/babel.js'></script>
+
+        <script type='text/babel'>
+            const rootHandle=document.getElementById('root')
+
+            class Counter extends React.Component
+            {
+                // to set initial value in this it set initial state value
+                constructor()
+                {
+                    //call's the parent constructor before accessing 'this'
+                    super()
+                    this.state=
+                    {//almost always an object,as we can store multiple values
+                        count:0
+                    }
+                }
+                handleUp=()=>
+                {
+                    /*
+                    this function gets called when only the up btn is clicked
+                    we can update state value directly-yes
+                    set State is used for 
+                    update value of state
+
+                    setState is used for 
+                    update value of state
+                    rerender
+                    setState takes a function as an arguments (call back),
+                    prevState is the previous state value being passed as an argument
+
+                    React gives a method setState which is used to update the value or re-rendering 
+                    */
+                   this.setState(function(prevState)
+                   {// this call back function must  return object, the object  will  now becme the new state
+                        return {
+                           count:prevState.count+1
+                        }
+                    })
+                }
+                handleDown=()=>
+                {
+                    this.setState(function(prevState)
+                    {
+                        return {    
+                            count:prevState.count-1    
+                        }
+                    })
+                }
+                handleReset=()=>
+                {
+                    this.setState(function(prevState)
+                    {
+                        return {
+                            count:0
+                        }
+                    })
+                }            
+                render() {//render is only used for view purpose it is responsible for the ui to display to the user
+                    return (
+                        <div>
+                            <h1>{this.state.count}</h1>
+                            <button onClick={this.handleUp}>up</button>
+                            <button onClick={this.handleDown}>Down</button>
+                            <button onClick={this.handleReset}>Reset</button>    
+                        </div>
+                    )
+                }
+            }
+            const ele=
+            (
+                <div>
+                    <Counter/>
+                    <Counter/>
+                </div>
+            )
+      
+            ReactDOM.render(ele,rootHandle)  
+        </script>
+    </body>
+</html>

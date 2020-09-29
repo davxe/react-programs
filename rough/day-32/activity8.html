@@ -1,0 +1,83 @@
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react-dom.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/babel.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/axios.js'></script>
+        <script type='text/babel'>
+            const rootHandle=document.getElementById('root')
+            class TaskRemove extends React.Component
+            {
+                constructor()
+                {
+                    super()
+                    this.state={
+                        tasks:[
+                            {id:1,name:'user1',email:'user1@gmail.com'},
+                            {id:2,name:'user2',email:'user2@gmail.com'},
+                            {id:3,name:'user3',email:'user3@gmail.com'}
+                        ],
+                        text:''
+                    }
+                }
+                handleChange=(e)=>{
+                    const text=e.target.value
+                    this.setState({text})
+                }
+                handleSubmit=(e)=>{
+                    e.preventDefault()
+                   // const text=this.state.text
+                    this.setState(prevState=>{
+                        return{
+                            tasks:prevState.tasks.filter(ele=>ele.email!=this.state.text),
+                            text:''
+                        }
+                    })
+                }
+                render()
+                {
+                    return(
+                        <div>
+                            <h2>listing taasks - {this.state.tasks.length}</h2>
+                            <table border='2'>
+                                <thead>
+                                    <tr>
+                                        <th>id</th>
+                                        <th>name</th>
+                                        <th>email</th>
+                                        <th>action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {
+                                        this.state.tasks.map((ele,i)=>{
+                                            return(
+                                                <tr key={i}>
+                                                    <td>{ele.id}</td>
+                                                    <td>{ele.name}</td>
+                                                    <td>{ele.email}</td>
+                                                </tr>
+                                            )
+                                        })
+                                    }
+                                </tbody>
+                            </table>
+                            <form onSubmit={this.handleSubmit}>
+                                <input type='text' value={this.state.text} onChange={this.handleChange}/><br/>
+                                <input type='submit' value='remove'/>
+                            </form>
+                        </div>
+                    )
+                }
+            } 
+            ReactDOM.render(<TaskRemove/>,rootHandle)
+        </script>
+
+    </body>
+</html>

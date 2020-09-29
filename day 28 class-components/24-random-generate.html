@@ -1,0 +1,60 @@
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react-dom.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/babel.js'></script>
+
+        <script type='text/babel'>
+            const rootHandle=document.getElementById('root')
+
+            class Generate extends React.Component
+            { 
+                constructor()
+                {
+                    super()
+                    this.state=
+                    {
+                        count:0,
+                        number:""
+                    }
+                }
+
+                handleGenerate=()=>
+                {
+                    const random=Math.round(Math.random()*100)
+                    this.setState(
+                    {
+                        number:random
+                    })
+                }
+                handleUp=()=>{
+                    this.setState(function(prevState)
+                    {
+                        return{
+                            count:prevState.count+1
+                        }
+                    })
+                }                
+                render()
+                {
+                    return (
+                    <div>
+                    <h2>Random Numbers - {this.state.number}</h2>
+                    <button onClick={this.handleGenerate}>Generate</button>
+                    <hr/>
+                    <h2>count - {this.state.count}</h2>
+                    <button onClick={this.handleUp}>up</button>
+                    </div>
+                    )
+                }               
+            }
+            ReactDOM.render(<Generate/>,rootHandle)
+        </script>
+    </body>
+</html>

@@ -1,0 +1,69 @@
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <div id="root">
+
+        </div>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/react-dom.development.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/babel.js'></script>
+        <script src = '/media/davxe/edrive/sem 8/training/mern-stack/react/js/axios.js'></script>
+        <script type='text/babel'>
+            const rootHandle=document.getElementById('root')
+            class RemoveEmail extends React.Component
+            {
+                constructor()
+                {
+                    super()
+                    this.state={
+                        tasks:[
+                            {id:1,name:'user1',email:'user1@gmail.com'},
+                            {id:2,name:'user2',email:'user2@gmail.com'},
+                            {id:3,name:'user3',email:'user3@gmail.com'}
+                        ]
+                    }
+                }
+                handleRemove=()=>{
+                    const name=window.prompt('enter user\'s name')
+                    this.setState(prevState=>({tasks:prevState.tasks.filter(task=>task.name!=name)}))
+                }
+                render()
+                {
+                    return(
+                        <div>
+                            <h2>listing taasks - {this.state.tasks.length}</h2>
+                            <table border='2'>
+                                <thead>
+                                    <tr>
+                                        <th>id</th>
+                                        <th>name</th>
+                                        <th>email</th>
+                                        <th>action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {
+                                        this.state.tasks.map((ele,i)=>{
+                                            return(
+                                                <tr key={i}>
+                                                    <td>{ele.id}</td>
+                                                    <td>{ele.name}</td>
+                                                    <td>{ele.email}</td>
+                                                    <td><button onClick={this.handleRemove}>remove</button></td>
+                                                </tr>
+                                            )
+                                        })
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    )
+                }
+            }
+            ReactDOM.render(<RemoveEmail/>,rootHandle)
+        </script>
+
+    </body>
+</html>
